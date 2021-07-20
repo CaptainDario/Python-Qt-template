@@ -33,8 +33,39 @@
      <height>26</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu_settings">
+    <property name="title">
+     <string>settings</string>
+    </property>
+    <widget class="QMenu" name="menu_mode">
+     <property name="title">
+      <string>mode (requires restart)</string>
+     </property>
+     <addaction name="action_light"/>
+     <addaction name="action_dark"/>
+    </widget>
+    <addaction name="menu_mode"/>
+    <addaction name="separator"/>
+    <addaction name="action_about"/>
+   </widget>
+   <addaction name="menu_settings"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_light">
+   <property name="text">
+    <string>light</string>
+   </property>
+  </action>
+  <action name="action_dark">
+   <property name="text">
+    <string>dark</string>
+   </property>
+  </action>
+  <action name="action_about">
+   <property name="text">
+    <string>about</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

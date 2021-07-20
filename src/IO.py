@@ -2,6 +2,7 @@
 import sys
 import os
 import tempfile
+import pickle
 
 #PySide2
 from PySide2.QtUiTools import QUiLoader
@@ -9,6 +10,7 @@ from PySide2.QtCore import QFile, QIODevice
 
 #custom
 import about
+from settings import Settings
 
 
 
@@ -69,6 +71,23 @@ def create_data_file():
     
     data_file = os.path.join(data_dir, about.data_file_name)
     
-    #check if the directory does not exists and create it if necessary
+    #check if the config file does not exists and create it if necessary
     if(not os.path.exists(data_file)):
-        with open(data_file, "w+"): pass
+        open(data_file, mode="w+").close()
+        save_settings(Settings())
+
+def save_settings(settings : Settings):
+    """ Saves a settings object to the data file
+    """
+
+    with open(os.path.join(tempfile.gettempdir(), about.name, about.data_file_name), mode="wb") as f:
+        pickle.dump(settings, f)
+
+def load_settings() -> Settings:
+
+    settings = None
+
+    with open(os.path.join(tempfile.gettempdir(), about.name, about.data_file_name), mode="rb") as f:
+        settings = pickle.load(f)
+
+    return settings
