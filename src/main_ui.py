@@ -47,8 +47,6 @@ class main_ui(object):
         # check if updates are available
         self.check_for_updates()
 
-        self.show_about_window()
-
 
     def get_ui_elements(self):
         '''
