@@ -50,8 +50,8 @@ if __name__ == "__main__":
     build_command_folder = ""
     build_command_file = ""
 
-    name_folder = str(about.full_id) + "_folder"
-    name_file   = str(about.full_id) + "_file"
+    name_folder = (str(about.full_id) + "_folder").replace(" ", "")
+    name_file   = (str(about.full_id) + "_file").replace(" ", "")
 
     pyinstaller = ""
 
@@ -62,11 +62,12 @@ if __name__ == "__main__":
     print("Building on", platform.system(), "...")
     #build for WINDOWS
     if(platform.system() == "Windows"):
-        pyinstaller = os.path.join(".venv_rel", "Scripts", "pyinstaller.exe")
+        pyinstaller = os.path.join(".venv", "Scripts", "pyinstaller.exe")
 
         data =  "--add-data .\\ui;ui "
         data += "--add-data .\\data;data "
         data += "--add-data .\\icons;icons "
+        data += "--add-data .\\.venv\\Lib\\site-packages\\qtmodern;qtmodern "
 
         path = "--distpath=.\\build\\" + platform.system()
 
@@ -85,9 +86,8 @@ if __name__ == "__main__":
 
         data =  "--add-data ./ui:ui "
         data += "--add-data ./data:data "
-        data += "--add-data ./media/banner.png:media "
-        # bug in pyinstaller 4.1 -> can/shoule be removed with next stable release
-        data += "--add-data ./.venv_rel/lib/python3.8/site-packages/PySide2/Qt/plugins:./PySide2/plugins"
+        data += "--add-data ./icons;icons "
+        data += "--add-data ./.venv/Lib/site-packages/qtmodern;qtmodern "
 
         path = "--distpath=./build/" + platform.system()
 
@@ -107,9 +107,8 @@ if __name__ == "__main__":
         data = ""
         data =  "--add-data ./ui:ui "
         data += "--add-data ./data:data "
-        data += "--add-data ./media/banner.png:media "
-        # bug in pyinstaller 4.1 -> can/shoule be removed with next stable release
-        data += "--add-data ./.venv_rel/lib/python3.8/site-packages/PySide2/Qt/plugins:./PySide2/plugins"
+        data += "--add-data ./icons;icons "
+        data += "--add-data ./.venv/Lib/site-packages/qtmodern;qtmodern "
 
         path = "--distpath=./build/" + platform.system()
 
