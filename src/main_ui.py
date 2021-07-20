@@ -1,10 +1,12 @@
 import os
 import webbrowser
 
-from PySide2.QtWidgets import QAction, QLineEdit, QPushButton, QMainWindow, QMessageBox, QTextEdit
+from PySide2.QtWidgets import QAction, QLabel, QPushButton, QMainWindow, QMessageBox, QTextEdit, QHBoxLayout, QWidget
 from PySide2.QtGui import QIcon
+from PySide2.QtCore import Qt
 
 import requests
+import qtmodern
 
 from settings import Settings
 from mode import Mode
@@ -27,6 +29,7 @@ class main_ui(object):
 
     #extra windows
     about_window = None
+    update_window = None
 
     # main ui elements
     pushButton_test_button = None
@@ -36,8 +39,6 @@ class main_ui(object):
 
         self.window   = window
         self.settings = settings
-
-        #window.setWindowIcon(QIcon(IO.resource_path("img/icon.ico")))
         
         # init ui
         self.get_ui_elements()
@@ -103,16 +104,14 @@ class main_ui(object):
                 if(release > about.version + about.release_suffix):
                     print("there is a new version available on GitHub")
 
-                    msgb = QMessageBox(QMessageBox.Information,
-                        "New Version Available!",
-                        "There is a new version of " + about.name + " available at GitHub!",
-                        buttons=QMessageBox.Open | QMessageBox.Close
+                    #load the ui from file
+                    self.update_window = IO.load_ui_file(IO.resource_path(os.path.join("ui", "update.ui")))
+                    self.update_window.setWindowTitle(about.name + ": New Version Available!")
+                    self.update_window.findChild(QLabel, "label_update").setText(
+                        "There is a new version of " + about.name + " available at GitHub!"
                     )
-                    #msgb.setWindowIcon(QIcon(IO.resource_path("img/icon.ico")))
-                    result = msgb.exec()
-
-                    if (result == QMessageBox.Open):
-                        webbrowser.open_new_tab(about.latest_release_url)
+                    self.update_window = qtmodern.windows.ModernWindow(self.update_window)
+                    self.update_window.show()
 
         except:
             print("Could not connect to GitHub at:", about.latest_release_api)
@@ -122,12 +121,15 @@ class main_ui(object):
         """
 
         #load the ui from file
-        self.about_window = IO.load_ui_file(IO.resource_path(os.path.join("ui", "about.ui"))) 
+        self.about_window = IO.load_ui_file(IO.resource_path(os.path.join("ui", "about.ui")))
+        self.about_window = qtmodern.windows.ModernWindow(self.about_window)
         self.about_window.setWindowTitle(about.full_id)
         
         path = IO.resource_path(os.path.join(os.getcwd(), "README.md"))
         with open(path, mode="r") as f:
-            self.about_window.findChild(QTextEdit, "textEdit_about").setMarkdown(f.read())
+            text = f.read()
+        
+        self.about_window.findChild(QTextEdit, "textEdit_about").setMarkdown(text)
         self.about_window.show()
         
 

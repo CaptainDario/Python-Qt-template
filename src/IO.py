@@ -14,8 +14,6 @@ from settings import Settings
 
 
 
-
-
 def load_ui_file(path : str):
     """
     Loads the main ".ui"-file from the "ui"-folder and returns the QMainWindow from it.

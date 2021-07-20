@@ -25,7 +25,7 @@ if __name__ == "__main__":
 
     #load the ui from file
     window = IO.load_ui_file(IO.resource_path(os.path.join("ui", "main.ui"))) 
-    window.setWindowTitle(about.full_id)
+    window.setWindowTitle(about.name)
     
     # set the theme
     if(settings.mode == Mode.DARK):
