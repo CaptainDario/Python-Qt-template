@@ -1,8 +1,8 @@
 # the name of the program
 name           = "PySide2 Template"
 # the current version
-version        = "0.2"
-release_suffix = "a"
+version        = "1.0"
+release_suffix = ""
 
 # complete name of the software including version
 full_id = name + " v" + version + release_suffix
