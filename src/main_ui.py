@@ -2,8 +2,6 @@ import os
 import webbrowser
 
 from PySide2.QtWidgets import QAction, QLabel, QPushButton, QMainWindow, QMessageBox, QTextEdit, QHBoxLayout, QWidget
-from PySide2.QtGui import QIcon
-from PySide2.QtCore import Qt
 
 import requests
 import qtmodern
@@ -81,7 +79,7 @@ class main_ui(object):
     def set_mode(self, mode : Mode):
         """ Sets the theme of the ui and saves it to file.
 
-        Args;
+        Args:
             mode : the new mode
         """
         
@@ -99,7 +97,9 @@ class main_ui(object):
             r = requests.get(about.latest_release_api)
 
             if(r.status_code == 200):
-                release = r.json()["tag_name"][1:]
+                release = r.json()["tag_name"]
+                if(release[0] == "v"):
+                    release = release[1:]
 
                 if(release > about.version + about.release_suffix):
                     print("there is a new version available on GitHub")
