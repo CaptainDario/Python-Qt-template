@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>404</width>
-    <height>309</height>
+    <height>326</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
-    <widget class="QTextEdit" name="textEdit_about">
+    <widget class="QTextEdit" name="textEdit_help">
      <property name="readOnly">
       <bool>true</bool>
      </property>

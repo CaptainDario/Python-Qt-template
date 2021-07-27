@@ -1,7 +1,8 @@
 import os
 import webbrowser
 
-from PySide2.QtWidgets import QAction, QLabel, QPushButton, QMainWindow, QMessageBox, QTextEdit, QHBoxLayout, QWidget
+from PySide2.QtWidgets import QAction, QLabel, QPushButton, QMainWindow, QMessageBox, \
+                            QTextEdit, QWidget, QStatusBar
 
 import requests
 import qtmodern
@@ -17,22 +18,12 @@ class main_ui(object):
     """The main-UI of the IP-time-lapse-toll.
 
     Attributes:
-        pushButton_test_button (QPus) : The window which previews the IP camera stream.
+        action_light   (QAction) : menubar element to select light mode
+        action_dark    (QAction) : menubar element to select dark mode
+        action_help    (QAction) : menubar element to open the help window
+        action_about   (QAction) : menubar element to open the about window
     """
     
-    # settings menu
-    action_light = None
-    action_dark  = None
-    action_about = None
-
-    #extra windows
-    about_window = None
-    update_window = None
-
-    # main ui elements
-    pushButton_test_button = None
-
-
     def __init__(self, window : QMainWindow, settings : Settings):
 
         self.window   = window
@@ -56,14 +47,13 @@ class main_ui(object):
         self.action_light = self.window.findChild(QAction, "action_light")
         self.action_dark  = self.window.findChild(QAction, "action_dark")
         self.action_about = self.window.findChild(QAction, "action_about")
+        self.action_help  = self.window.findChild(QAction, "action_help")
 
         self.pushButton_test_button = self.window.findChild(QPushButton, "pushButton_test_button")
 
     def init_ui_elements(self):
         """ Initializes all ui-elements.
         """
-        
-        pass
 
     def connect_ui(self):
         '''
@@ -73,6 +63,7 @@ class main_ui(object):
         self.action_light.triggered.connect(lambda : self.set_mode(Mode.LIGHT))
         self.action_dark.triggered.connect(lambda : self.set_mode(Mode.DARK))
         self.action_about.triggered.connect(self.show_about_window)
+        self.action_help.triggered.connect(self.show_help_window)
 
         self.pushButton_test_button.pressed.connect(lambda : print("test"))
 
@@ -115,22 +106,34 @@ class main_ui(object):
 
         except:
             print("Could not connect to GitHub at:", about.latest_release_api)
-
-    def show_about_window(self):
+    
+    def show_help_window(self):
         """ Open the about window which shows the repos README.md.
         """
 
         #load the ui from file
-        self.about_window = IO.load_ui_file(IO.resource_path(os.path.join("ui", "about.ui")))
-        self.about_window = qtmodern.windows.ModernWindow(self.about_window)
-        self.about_window.setWindowTitle(about.full_id)
+        help_window = IO.load_ui_file(IO.resource_path(os.path.join("ui", "help.ui")))
+        help_window = qtmodern.windows.ModernWindow(help_window)
+        help_window.setWindowTitle(about.full_id)
         
         path = IO.resource_path(os.path.join(os.getcwd(), "README.md"))
         with open(path, mode="r") as f:
             text = f.read()
         
-        self.about_window.findChild(QTextEdit, "textEdit_about").setMarkdown(text)
-        self.about_window.show()
+        help_window.findChild(QTextEdit, "textEdit_help").setMarkdown(text)
+        help_window.show()
+    
+    def show_about_window(self):
+        """ Open the about window which shows the repos README.md.
+        """
+
+        #load the ui from file
+        about_window = IO.load_ui_file(IO.resource_path(os.path.join("ui", "about.ui")))
+        about_window = qtmodern.windows.ModernWindow(about_window)
+        about_window.setWindowTitle(about.full_id)
+        
+        about_window.findChild(QTextEdit, "textEdit_about").setMarkdown(about.toString())
+        about_window.show()
         
 
 

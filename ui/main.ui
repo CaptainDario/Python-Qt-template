@@ -30,7 +30,7 @@
      <x>0</x>
      <y>0</y>
      <width>804</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_settings">
@@ -46,6 +46,7 @@
     </widget>
     <addaction name="menu_mode"/>
     <addaction name="separator"/>
+    <addaction name="action_help"/>
     <addaction name="action_about"/>
    </widget>
    <addaction name="menu_settings"/>
@@ -64,6 +65,11 @@
   <action name="action_about">
    <property name="text">
     <string>about</string>
+   </property>
+  </action>
+  <action name="action_help">
+   <property name="text">
+    <string>help</string>
    </property>
   </action>
  </widget>
