@@ -1,4 +1,4 @@
-PySide2==5.15.2
+QtPy==2.3.0
 qtmodern==0.2.0
 requests==2.26.0
 PyInstaller==4.4
