@@ -1,8 +1,8 @@
 import os
 import sys
 
-from PySide2.QtWidgets import QApplication
-from PySide2.QtCore import QFile, QTextStream
+from qtpy.QtWidgets import QApplication
+from qtpy.QtCore import QFile, QTextStream
 
 import qtmodern.styles
 import qtmodern.windows

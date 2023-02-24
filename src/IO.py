@@ -5,8 +5,8 @@ import tempfile
 import pickle
 
 #PySide2
-from PySide2.QtUiTools import QUiLoader
-from PySide2.QtCore import QFile, QIODevice
+from qtpy.QtUiTools import QUiLoader
+from qtpy.QtCore import QFile, QIODevice
 
 #custom
 import about

@@ -1,7 +1,7 @@
 import os
 import webbrowser
 
-from PySide2.QtWidgets import QAction, QLabel, QPushButton, QMainWindow, QMessageBox, \
+from qtpy.QtWidgets import QAction, QLabel, QPushButton, QMainWindow, QMessageBox, \
                             QTextEdit, QWidget, QStatusBar
 
 import requests
@@ -15,7 +15,7 @@ import about
 
 
 class main_ui(object):
-    """The main-UI of the IP-time-lapse-toll.
+    """The main-UI of the application.
 
     Attributes:
         action_light   (QAction) : menubar element to select light mode
