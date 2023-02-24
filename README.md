@@ -4,7 +4,7 @@ A simple PySide(2) project which can be used as a template for PySide(2) project
 
 ## What is this?
 
-This is a template to be used to have a quick start with developing Qt applications in python with PySide 2.
+This is a template to be used to have a quick start with developing Qt applications in python with any qt binding (pyside 2/5/6 pyqt).
 The current feature set is:
 
 * `.ui`-files (designed in QtDesigner) which are connected to python
@@ -17,14 +17,16 @@ and all of this can easily be extended.
 
 ## Getting started
 
-Clone or use this repos as a template for your own PySide2 project.
-Than install the dependencies with:
+Clone or use this repos as a template for your own qt project.
+Afterwards, install the dependencies with:
 
 ``` python
 pip install -r requirements.txt
 ```
 
-Afterwards this template should be initialized with:
+Additionally, you need to install a qt-python binding, for example PySide6.
+
+Now this template can be cnofigured:
 
 * In the `about.py` some variables like: application name, version no. and repo URL need to be set for your application.
 * In the `settings.py` you can define your settings which can be saved and loaded with the `IO.save_settings()` and `IO.load_settings`
@@ -42,4 +44,4 @@ To build an executable (MacOS, Linux and Windows are supported) run:
 python build_with_pyinstaller.py
 ```
 
-this script assumes that in a folder `pyside2-template/.venv` a python virtual environment exists. Than a executable will be build and stored in the `build`  folder.
+this script assumes that in a folder `pyside2-template/.venv` a python virtual environment exists. Then a executable will be build and stored in a folder called `build`.
