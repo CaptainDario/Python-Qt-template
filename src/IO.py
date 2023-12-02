@@ -18,10 +18,16 @@ def load_ui_file(path : str):
     """
     Loads the main ".ui"-file from the "ui"-folder and returns the QMainWindow from it.
     Also initializes an instance of the "ui"-class.
+    
     Arguments:
         path : the path to the ui file which should be loaded
+    
     Returns:
         QWindow: The loaded Window
+
+    Caution:
+        This should not be used if the loaded ui should be extended
+        For this use case use `qtpy.uic`
     """
     
     ui_file = QFile(path)

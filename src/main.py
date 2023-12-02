@@ -22,10 +22,6 @@ if __name__ == "__main__":
     settings = IO.load_settings()
 
     app = QApplication(sys.argv)
-
-    #load the ui from file
-    window = IO.load_ui_file(IO.resource_path(os.path.join("ui", "main.ui"))) 
-    window.setWindowTitle(about.name)
     
     # set the theme
     if(settings.mode == Mode.DARK):
@@ -34,8 +30,7 @@ if __name__ == "__main__":
         qtmodern.styles.light(app)
 
     # show the ui
-    mw = qtmodern.windows.ModernWindow(window)
-    mw.show()
-    ui = main_ui(mw, settings)
+    ui = main_ui(settings)
+    ui.show()
 
     sys.exit(app.exec_())

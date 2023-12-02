@@ -3,6 +3,7 @@ import webbrowser
 
 from qtpy.QtWidgets import QAction, QLabel, QPushButton, QMainWindow, QMessageBox, \
                             QTextEdit, QWidget, QStatusBar
+from qtpy import uic
 
 import requests
 import qtmodern
@@ -14,7 +15,7 @@ import about
 
 
 
-class main_ui(object):
+class main_ui(QMainWindow):
     """The main-UI of the application.
 
     Attributes:
@@ -24,9 +25,11 @@ class main_ui(object):
         action_about   (QAction) : menubar element to open the about window
     """
     
-    def __init__(self, window : QMainWindow, settings : Settings):
+    def __init__(self, settings : Settings):
 
-        self.window   = window
+        QMainWindow.__init__(self)
+        uic.loadUi(os.path.join("ui", "main.ui"), self)
+
         self.settings = settings
         
         # init ui
@@ -44,12 +47,12 @@ class main_ui(object):
         '''
 
         # settings menu
-        self.action_light = self.window.findChild(QAction, "action_light")
-        self.action_dark  = self.window.findChild(QAction, "action_dark")
-        self.action_about = self.window.findChild(QAction, "action_about")
-        self.action_help  = self.window.findChild(QAction, "action_help")
+        self.action_light = self.findChild(QAction, "action_light")
+        self.action_dark  = self.findChild(QAction, "action_dark")
+        self.action_about = self.findChild(QAction, "action_about")
+        self.action_help  = self.findChild(QAction, "action_help")
 
-        self.pushButton_test_button = self.window.findChild(QPushButton, "pushButton_test_button")
+        self.pushButton_test_button = self.findChild(QPushButton, "pushButton_test_button")
 
     def init_ui_elements(self):
         """ Initializes all ui-elements.
