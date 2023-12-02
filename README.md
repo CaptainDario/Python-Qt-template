@@ -1,6 +1,6 @@
-# PySide2-template
+# Python-Qt-template
 
-A simple PySide(2) project which can be used as a template for PySide(2) projects.
+A simple template that can be used to quickstart python qt projects.
 
 ## What is this?
 
